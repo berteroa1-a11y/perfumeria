@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagos</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="Biblioteca/aos-master/aos-master/dist/aos.css">
+    <link rel="stylesheet" href="Biblioteca/bootstrap-5.3.8-dist/bootstrap-5.3.8-dist/css/bootstrap.min.css">
+</head>
+<body>
+    <!-- =========================
+         BARRA SUPERIOR
+    ========================== -->
+
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">
+                ✦ PERFUMERÍA ÉLITE
+            </a>
+        </div>
+    </nav>
+
+
+    <!-- =========================
+         PAGINA DE PAGO
+    ========================== -->
+
+    <main class="pagina-pago">
+
+        <div class="contenedor-pago">
+
+            <div class="titulo-pago">
+                <span>PERFUMERÍA ÉLITE</span>
+
+                <h1>Finalizar compra</h1>
+
+                <p>
+                    Revisá tu pedido y completá los datos para finalizar la compra.
+                </p>
+            </div>
+
+
+            <div class="row g-4">
+
+
+                <!-- =========================
+                     RESUMEN DEL PEDIDO
+                ========================== -->
+
+                <div class="col-lg-6">
+
+                    <div class="resumen-pedido">
+
+                        <h2>🛍️ Tu pedido</h2>
+
+                        <div id="productosPago">
+
+                            <!-- Los productos aparecerán acá -->
+
+                        </div>
+
+                        <hr>
+
+                        <div class="total-pago">
+
+                            <span>Total</span>
+
+                            <strong id="totalPago">
+                                $0
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =========================
+                     FORMULARIO DE TARJETA
+                ========================== -->
+
+                <div class="col-lg-6">
+
+                    <div class="formulario-pago">
+
+                        <h2>💳 Datos de pago</h2>
+
+                        <p class="texto-seguridad">
+                            Completá los datos de tu tarjeta.
+                        </p>
+
+
+                        <!-- TITULAR -->
+
+                        <div class="campo-pago">
+
+                            <label for="nombreTitular">
+                                Nombre del titular
+                            </label>
+
+                            <input
+                                type="text"
+                                id="nombreTitular"
+                                placeholder="Nombre y apellido"
+                            >
+
+                        </div>
+
+
+                        <!-- TARJETA -->
+
+                        <div class="campo-pago">
+
+                            <label for="numeroTarjeta">
+                                Número de tarjeta
+                            </label>
+
+                            <input
+                                type="text"
+                                id="numeroTarjeta"
+                                maxlength="19"
+                                placeholder="0000 0000 0000 0000"
+                            >
+
+                        </div>
+
+
+                        <div class="row">
+
+
+                            <!-- VENCIMIENTO -->
+
+                            <div class="col-6">
+
+                                <div class="campo-pago">
+
+                                    <label for="vencimiento">
+                                        Vencimiento
+                                    </label>
+
+                                    <input
+                                        type="text"
+                                        id="vencimiento"
+                                        maxlength="5"
+                                        placeholder="MM/AA"
+                                    >
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- CVV -->
+
+                            <div class="col-6">
+
+                                <div class="campo-pago">
+
+                                    <label for="cvv">
+                                        CVV
+                                    </label>
+
+                                    <input
+                                        type="password"
+                                        id="cvv"
+                                        maxlength="4"
+                                        placeholder="•••"
+                                    >
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- DIRECCIÓN -->
+
+                        <div class="campo-pago">
+
+                            <label for="direccion">
+                                Dirección de entrega
+                            </label>
+
+                            <input
+                                type="text"
+                                id="direccion"
+                                placeholder="Ingresá tu dirección"
+                            >
+
+                        </div>
+
+
+                        <!-- BOTÓN -->
+
+                        <button
+                            class="btn-confirmar-pago"
+                            onclick="confirmarPago()"
+                        >
+
+                            🔒 Confirmar compra
+
+                        </button>
+
+
+                        <p class="aviso-pago">
+                            🔐 Esta página es una demostración de pago.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+
+    <script>
+
+        let carrito = JSON.parse(
+            localStorage.getItem("carrito")
+        ) || [];
+
+
+        function mostrarProductos() {
+
+            let lista =
+                document.getElementById("productosPago");
+
+            let total =
+                document.getElementById("totalPago");
+
+
+            if (carrito.length === 0) {
+
+                lista.innerHTML = `
+                    <p class="pedido-vacio">
+                        No hay productos en el carrito.
+                    </p>
+                `;
+
+                total.textContent = "$0";
+
+                return;
+            }
+
+
+            lista.innerHTML = "";
+
+            let totalCompra = 0;
+
+
+            carrito.forEach(function(producto) {
+
+                totalCompra += producto.precio;
+
+
+                lista.innerHTML += `
+
+                    <div class="producto-pago">
+
+                        <div>
+
+                            <strong>
+                                ${producto.nombre}
+                            </strong>
+
+                        </div>
+
+                        <span>
+                            $${producto.precio.toLocaleString("es-AR")}
+                        </span>
+
+                    </div>
+
+                `;
+
+            });
+
+
+            total.textContent =
+                "$" + totalCompra.toLocaleString("es-AR");
+
+        }
+
+
+        function confirmarPago() {
+
+            let nombre =
+                document.getElementById("nombreTitular").value.trim();
+
+            let tarjeta =
+                document.getElementById("numeroTarjeta").value.trim();
+
+            let vencimiento =
+                document.getElementById("vencimiento").value.trim();
+
+            let cvv =
+                document.getElementById("cvv").value.trim();
+
+            let direccion =
+                document.getElementById("direccion").value.trim();
+
+
+            if (
+                nombre === "" ||
+                tarjeta === "" ||
+                vencimiento === "" ||
+                cvv === "" ||
+                direccion === ""
+            ) {
+
+                alert(
+                    "Por favor completá todos los campos."
+                );
+
+                return;
+            }
+
+
+            alert(
+                "¡Compra realizada correctamente! 🛍️\n\n" +
+                "Gracias por comprar en Perfumería Élite."
+            );
+
+
+            localStorage.removeItem("carrito");
+
+            window.location.href = "index.html";
+
+        }
+
+
+        mostrarProductos();
+
+    </script>
+</body>
+</html>
