@@ -15,9 +15,24 @@
          href="#contacto">Contacto</a> </li> </ul> </div> </div> </nav> <!-- PORTADA --> 
          <section class="hero"> <div class="container text-center"> <h1 data-aos="fade-up"> Encontrá tu fragancia ideal </h1> <p data-aos="fade-up" data-aos-delay="200"> Perfumes originales para cada momento. </p> <a href="#perfumes" class="btn btn-dark btn-lg" data-aos="fade-up" data-aos-delay="400"> Ver perfumes </a> </div> </section> 
          <!-- PERFUMES --> <section id="perfumes" class="container py-5"> <h2 class="text-center mb-5" data-aos="fade-up"> Nuestros perfumes </h2> <div class="row g-4"> 
-            <!-- PERFUME 1 --> <div class="col-md-4" data-aos="fade-up"> <div class="card perfume-card"> <img src="img/perfume 2.png" class="card-img-top" alt="Perfume"> <div class="card-body text-center"> <h5 class="card-title"> Perfume Elegance </h5> <p class="card-text"> Una fragancia elegante y sofisticada. </p> <h5> $168.487,00 </h5> <a href="tarjeta.html" class="btn btn-dark">Comprar</a></div> </div> </div> 
-            <!-- PERFUME 2 --> <div class="col-md-4" data-aos="fade-up" data-aos-delay="200"> <div class="card perfume-card"> <img src="img/club 2.jpg" class="card-img-top" alt="Perfume"> <div class="card-body text-center"> <h5 class="card-title"> Club De Nuit </h5> <p class="card-text"> Una fragancia intensa para la noche y para el verano. </p> <h5> $96.387,00 </h5> <a href="tarjeta.html" class="btn btn-dark">Comprar</a> </div> </div> </div> 
-             <!-- PERFUME 3 --> <div class="col-md-4" data-aos="fade-up" data-aos-delay="400"> <div class="card perfume-card"> <img src="img/jeaan 2.jpg" class="card-img-top" alt="Perfume"> <div class="card-body text-center"> <h5 class="card-title"> Jean Paul Gaultier Paradise Garden </h5> <p class="card-text"> Tropical, fresco y cremoso. Un paraíso de menta y agua de coco con un fondo de sándalo sensual. </p> <h5> $281.374,00 </h5> <a href="tarjeta.html" class="btn btn-dark">Comprar</a> </div> </div> </div> </div> </section> 
+            <!-- PERFUME 1 --> <div class="col-md-4" data-aos="fade-up"> <div class="card perfume-card"> <img src="img/perfume 2.png" class="card-img-top" alt="Perfume"> <div class="card-body text-center"> <h5 class="card-title"> Perfume Elegance </h5> <p class="card-text"> Una fragancia elegante y sofisticada. </p> <h5> $168.487,00 </h5> 
+<button class="btn btn-dark"
+    onclick="comprarAhora('Perfume Elegance', 168487)">
+    Comprar
+</button>
+</div> </div> </div> 
+            <!-- PERFUME 2 --> <div class="col-md-4" data-aos="fade-up" data-aos-delay="200"> <div class="card perfume-card"> <img src="img/club 2.jpg" class="card-img-top" alt="Perfume"> <div class="card-body text-center"> <h5 class="card-title"> Club De Nuit </h5> <p class="card-text"> Una fragancia intensa para la noche y para el verano. </p> <h5> $96.387,00 </h5> 
+<button class="btn btn-dark"
+    onclick="comprarAhora('Club De Nuit', 96387)">
+    Comprar
+</button>
+ </div> </div> </div> 
+             <!-- PERFUME 3 --> <div class="col-md-4" data-aos="fade-up" data-aos-delay="400"> <div class="card perfume-card"> <img src="img/jeaan 2.jpg" class="card-img-top" alt="Perfume"> <div class="card-body text-center"> <h5 class="card-title"> Jean Paul Gaultier Paradise Garden </h5> <p class="card-text"> Tropical, fresco y cremoso. Un paraíso de menta y agua de coco con un fondo de sándalo sensual. </p> <h5> $281.374,00 </h5> 
+<button class="btn btn-dark"
+    onclick="comprarAhora('Jean Paul Gaultier Paradise Garden', 281374)">
+    Comprar
+</button>
+</div> </div> </div> </div> </section> 
               <!-- OFERTAS -->  
                
               <section id="ofertas" class="ofertas"> <div class="container text-center"> <h2 data-aos="fade-up"> Ofertas especiales </h2> 
@@ -31,6 +46,22 @@
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
       
      
+<script>
+    function comprarAhora(nombre, precio) {
+        const producto = {
+            nombre: nombre,
+            precio: precio
+        };
+
+        localStorage.setItem(
+            "carrito",
+            JSON.stringify([producto])
+        );
+
+        window.location.href = "tarjeta.html";
+    }
+</script>
+
   
 </body>
 </html>
